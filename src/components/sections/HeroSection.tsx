@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Globe, Award, Users, Shield, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import heroImage from '@/assets/hero-makhana.jpg';
 import makhanaVarieties from '@/assets/makhana-varieties.jpg';
 import processingFacility from '@/assets/processing-facility.jpg';
@@ -46,8 +47,8 @@ const HeroSection = () => {
                 Get Bulk Quote
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button variant="outline" size="lg" className="border-white/80 text-white bg-white/10 hover:bg-white hover:text-primary backdrop-blur-sm">
-                View Products
+              <Button asChild variant="outline" size="lg" className="border-white/80 text-white bg-white/10 hover:bg-white hover:text-primary backdrop-blur-sm">
+                <Link to="/products">View Products</Link>
               </Button>
             </div>
 
