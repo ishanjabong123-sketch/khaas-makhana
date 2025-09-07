@@ -1,60 +1,8 @@
-import { Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Float, Center } from '@react-three/drei';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Globe, Award, Users } from 'lucide-react';
-import * as THREE from 'three';
+import { ArrowRight, Globe, Award, Users, Shield, CheckCircle } from 'lucide-react';
 import heroImage from '@/assets/hero-makhana.jpg';
-
-// 3D Makhana component
-function MakhanaSeeds() {
-  const seeds = Array.from({ length: 20 }, (_, i) => i);
-  
-  return (
-    <group>
-      {seeds.map((_, index) => {
-        const x = (Math.random() - 0.5) * 10;
-        const y = (Math.random() - 0.5) * 6;
-        const z = (Math.random() - 0.5) * 8;
-        
-        return (
-          <Float
-            key={index}
-            position={[x, y, z]}
-            rotation={[Math.random() * Math.PI, Math.random() * Math.PI, 0]}
-            speed={1 + Math.random() * 2}
-            rotationIntensity={0.5}
-            floatIntensity={0.8}
-          >
-            <mesh castShadow>
-              <sphereGeometry args={[0.15 + Math.random() * 0.1, 16, 16]} />
-              <meshStandardMaterial 
-                color={new THREE.Color().setHSL(0.12, 0.2, 0.9)} 
-                roughness={0.1}
-                metalness={0.1}
-              />
-            </mesh>
-          </Float>
-        );
-      })}
-    </group>
-  );
-}
-
-// 3D Scene component
-function Scene() {
-  return (
-    <>
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
-      <pointLight position={[-10, -10, -5]} intensity={0.5} />
-      
-      
-      <MakhanaSeeds />
-      <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 2} />
-    </>
-  );
-}
+import makhanaVarieties from '@/assets/makhana-varieties.jpg';
+import processingFacility from '@/assets/processing-facility.jpg';
 
 const HeroSection = () => {
   const stats = [
@@ -115,14 +63,66 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right Column - 3D Scene */}
+          {/* Right Column - Product Showcase Gallery */}
           <div className="hidden lg:block h-[600px] relative">
-            <div className="absolute inset-0 bg-white/10 rounded-3xl backdrop-blur-sm">
-              <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-                <Suspense fallback={null}>
-                  <Scene />
-                </Suspense>
-              </Canvas>
+            <div className="grid grid-cols-2 gap-4 h-full">
+              {/* Main Product Image */}
+              <div className="relative group overflow-hidden rounded-2xl">
+                <img 
+                  src={makhanaVarieties} 
+                  alt="Premium Makhana Varieties" 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Shield className="h-5 w-5 text-accent" />
+                      <span className="font-semibold">Premium Quality</span>
+                    </div>
+                    <p className="text-sm opacity-90">Grade A Export Quality</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Processing Facility */}
+              <div className="relative group overflow-hidden rounded-2xl">
+                <img 
+                  src={processingFacility} 
+                  alt="Modern Processing Facility" 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <div className="flex items-center gap-2 mb-2">
+                      <CheckCircle className="h-5 w-5 text-accent" />
+                      <span className="font-semibold">Modern Facility</span>
+                    </div>
+                    <p className="text-sm opacity-90">ISO Certified Processing</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quality Badges */}
+              <div className="col-span-2 flex justify-center items-center gap-6 bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                <div className="text-center">
+                  <div className="bg-accent/20 rounded-full p-3 mb-2 mx-auto w-fit">
+                    <Shield className="h-6 w-6 text-accent" />
+                  </div>
+                  <p className="text-white font-medium text-sm">ISO Certified</p>
+                </div>
+                <div className="text-center">
+                  <div className="bg-accent/20 rounded-full p-3 mb-2 mx-auto w-fit">
+                    <CheckCircle className="h-6 w-6 text-accent" />
+                  </div>
+                  <p className="text-white font-medium text-sm">Organic</p>
+                </div>
+                <div className="text-center">
+                  <div className="bg-accent/20 rounded-full p-3 mb-2 mx-auto w-fit">
+                    <Globe className="h-6 w-6 text-accent" />
+                  </div>
+                  <p className="text-white font-medium text-sm">Export Quality</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
