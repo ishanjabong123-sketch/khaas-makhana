@@ -49,14 +49,6 @@ function Scene() {
       <directionalLight position={[10, 10, 5]} intensity={1} />
       <pointLight position={[-10, -10, -5]} intensity={0.5} />
       
-      <Center>
-        <Float speed={0.5} rotationIntensity={0.2} floatIntensity={1}>
-          <mesh position={[0, 1, 0]}>
-            <boxGeometry args={[2.5, 0.8, 0.2]} />
-            <meshStandardMaterial color="#2D4A2D" metalness={0.3} roughness={0.4} />
-          </mesh>
-        </Float>
-      </Center>
       
       <MakhanaSeeds />
       <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 2} />
@@ -106,7 +98,7 @@ const HeroSection = () => {
                 Get Bulk Quote
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
+              <Button variant="outline" size="lg" className="border-white/80 text-white bg-white/10 hover:bg-white hover:text-primary backdrop-blur-sm">
                 View Products
               </Button>
             </div>
