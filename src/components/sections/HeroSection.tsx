@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Float, Text3D, Center } from '@react-three/drei';
+import { OrbitControls, Float, Center } from '@react-three/drei';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Globe, Award, Users } from 'lucide-react';
 import * as THREE from 'three';
