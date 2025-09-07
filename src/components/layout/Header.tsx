@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +27,7 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      isScrolled || !isHomePage ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 lg:h-20">
@@ -35,7 +37,7 @@ const Header = () => {
               Khaas Makhana
             </h1>
             <p className={`text-xs transition-colors duration-300 ${
-              isScrolled ? 'text-muted-foreground' : 'text-white/70'
+              isScrolled || !isHomePage ? 'text-muted-foreground' : 'text-white/70'
             }`}>Premium Fox Nut Exporters</p>
           </Link>
 
@@ -46,7 +48,7 @@ const Header = () => {
                 key={item.name}
                 to={item.href}
                 className={`hover:text-primary transition-colors duration-300 font-medium ${
-                  isScrolled ? 'text-foreground' : 'text-white'
+                  isScrolled || !isHomePage ? 'text-foreground' : 'text-white'
                 }`}
               >
                 {item.name}
@@ -57,7 +59,7 @@ const Header = () => {
           {/* Contact Info & CTA */}
           <div className="hidden lg:flex items-center space-x-4">
             <div className={`flex items-center space-x-2 text-sm transition-colors duration-300 ${
-              isScrolled ? 'text-muted-foreground' : 'text-white/70'
+              isScrolled || !isHomePage ? 'text-muted-foreground' : 'text-white/70'
             }`}>
               <Phone className="h-4 w-4" />
               <span>+91-XXXXX-XXXXX</span>
@@ -73,7 +75,7 @@ const Header = () => {
               variant="ghost"
               size="sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={isScrolled ? 'text-foreground' : 'text-white'}
+              className={`${isScrolled || !isHomePage ? 'text-foreground' : 'text-white'} hover:bg-white/10`}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>

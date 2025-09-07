@@ -3,33 +3,30 @@ import Footer from '@/components/layout/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Package, Ship, Globe, ArrowRight, Download } from 'lucide-react';
+import { Stepper } from '@/components/ui/stepper';
+import { CheckCircle, Package, Ship, Globe, Download } from 'lucide-react';
 
 const ExportProcess = () => {
   const processSteps = [
     {
-      step: 1,
       title: "Sourcing & Selection",
       description: "Direct sourcing from certified farmers in Bihar's best regions",
       details: ["Quality assessment at farm level", "Size grading", "Moisture content testing"],
       icon: CheckCircle
     },
     {
-      step: 2,
       title: "Processing & Packaging",
       description: "Modern facility processing with international standards",
       details: ["Cleaning and sorting", "Quality control testing", "Vacuum packaging"],
       icon: Package
     },
     {
-      step: 3,
       title: "Export Documentation",
       description: "Complete documentation and certification process",
       details: ["Export certificates", "Quality certifications", "Customs documentation"],
       icon: Ship
     },
     {
-      step: 4,
       title: "Global Delivery",
       description: "Reliable shipping to international destinations",
       details: ["Container loading", "Shipping coordination", "Delivery tracking"],
@@ -67,39 +64,9 @@ const ExportProcess = () => {
               </p>
             </div>
 
-            {/* Process Steps */}
-            <div className="grid lg:grid-cols-2 gap-8 mb-16">
-              {processSteps.map((process, index) => (
-                <Card key={index} className="relative hover:shadow-xl transition-all duration-300">
-                  <CardHeader>
-                    <div className="flex items-center gap-4">
-                      <div className="bg-primary/10 rounded-full p-3">
-                        <process.icon className="h-6 w-6 text-primary" />
-                      </div>
-                      <div>
-                        <div className="text-sm text-accent font-semibold">Step {process.step}</div>
-                        <CardTitle className="text-xl">{process.title}</CardTitle>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground mb-4">{process.description}</p>
-                    <ul className="space-y-2">
-                      {process.details.map((detail, idx) => (
-                        <li key={idx} className="flex items-center gap-2 text-sm">
-                          <CheckCircle className="h-4 w-4 text-accent" />
-                          {detail}
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                  {index < processSteps.length - 1 && (
-                    <div className="hidden lg:block absolute -right-4 top-1/2 transform -translate-y-1/2">
-                      <ArrowRight className="h-8 w-8 text-accent" />
-                    </div>
-                  )}
-                </Card>
-              ))}
+            {/* Process Stepper */}
+            <div className="mb-16">
+              <Stepper steps={processSteps} />
             </div>
 
             {/* Certifications */}
