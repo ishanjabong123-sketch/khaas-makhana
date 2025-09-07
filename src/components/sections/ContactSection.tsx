@@ -5,16 +5,16 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  MessageCircle, 
-  Send, 
+import {
+  Phone,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Send,
   Clock,
   Globe,
   Package,
-  CheckCircle
+  CheckCircle,
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -25,7 +25,7 @@ const ContactSection = () => {
     company: '',
     country: '',
     quantity: '',
-    message: ''
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -33,12 +33,13 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     setTimeout(() => {
       toast({
-        title: "Quote Request Submitted!",
-        description: "We'll contact you within 24 hours with pricing and availability.",
+        title: 'Quote Request Submitted!',
+        description:
+          "We'll contact you within 24 hours with pricing and availability.",
         duration: 5000,
       });
       setIsSubmitting(false);
@@ -48,54 +49,62 @@ const ContactSection = () => {
         company: '',
         country: '',
         quantity: '',
-        message: ''
+        message: '',
       });
     }, 1000);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const contactInfo = [
     {
       icon: Phone,
-      title: "Phone",
-      value: "+91-XXXXX-XXXXX",
-      description: "Mon-Sat, 9AM-6PM IST"
+      title: 'Phone',
+      value: '+91-70154-12372',
+      description: 'Mon-Sat, 9AM-6PM IST',
     },
     {
-      icon: Mail, 
-      title: "Email",
-      value: "export@khaasmakhana.com",
-      description: "24/7 Email Support"
+      icon: Mail,
+      title: 'Email',
+      value: 'export@khaasmakhana.com',
+      description: '24/7 Email Support',
     },
     {
       icon: MapPin,
-      title: "Location",
-      value: "Purnia, Bihar, India",
-      description: "Makhana Capital of the World"
-    }
+      title: 'Location',
+      value: 'Purnia, Bihar, India',
+      description: 'Makhana Capital of the World',
+    },
   ];
 
-  const whatsappNumber = "+91XXXXXXXXXX";
-  const whatsappMessage = "Hi! I'm interested in bulk makhana export. Please share pricing and availability.";
+  const whatsappNumber = '+91XXXXXXXXXX';
+  const whatsappMessage =
+    "Hi! I'm interested in bulk makhana export. Please share pricing and availability.";
 
   return (
     <section id="contact" className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4">Get In Touch</Badge>
+          <Badge variant="outline" className="mb-4">
+            Get In Touch
+          </Badge>
           <h2 className="text-4xl font-bold mb-6">
-            Ready to 
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"> Start Importing?</span>
+            Ready to
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              {' '}
+              Start Importing?
+            </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Contact us for bulk pricing, product samples, and custom packaging solutions. 
-            Our export team is ready to serve international buyers.
+            Contact us for bulk pricing, product samples, and custom packaging
+            solutions. Our export team is ready to serve international buyers.
           </p>
         </div>
 
@@ -185,9 +194,9 @@ const ContactSection = () => {
                   />
                 </div>
 
-                <Button 
-                  type="submit" 
-                  className="btn-accent w-full" 
+                <Button
+                  type="submit"
+                  className="btn-accent w-full"
                   disabled={isSubmitting}
                   size="lg"
                 >
@@ -215,7 +224,10 @@ const ContactSection = () => {
             {/* Contact Details */}
             <div className="grid gap-6">
               {contactInfo.map((info, index) => (
-                <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-all duration-300">
+                <Card
+                  key={index}
+                  className="border-none shadow-lg hover:shadow-xl transition-all duration-300"
+                >
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
@@ -224,7 +236,9 @@ const ContactSection = () => {
                       <div>
                         <h4 className="font-semibold text-lg">{info.title}</h4>
                         <p className="text-primary font-medium">{info.value}</p>
-                        <p className="text-sm text-muted-foreground">{info.description}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {info.description}
+                        </p>
                       </div>
                     </div>
                   </CardContent>
@@ -236,13 +250,23 @@ const ContactSection = () => {
             <Card className="bg-green-50 border-green-200">
               <CardContent className="p-6 text-center">
                 <MessageCircle className="h-12 w-12 text-green-600 mx-auto mb-4" />
-                <h4 className="text-xl font-semibold mb-2">Quick WhatsApp Inquiry</h4>
+                <h4 className="text-xl font-semibold mb-2">
+                  Quick WhatsApp Inquiry
+                </h4>
                 <p className="text-muted-foreground mb-4">
-                  Get instant response for urgent bulk orders and pricing inquiries
+                  Get instant response for urgent bulk orders and pricing
+                  inquiries
                 </p>
-                <Button 
+                <Button
                   className="bg-green-600 hover:bg-green-700 text-white"
-                  onClick={() => window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`, '_blank')}
+                  onClick={() =>
+                    window.open(
+                      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+                        whatsappMessage
+                      )}`,
+                      '_blank'
+                    )
+                  }
                 >
                   <MessageCircle className="mr-2 h-4 w-4" />
                   Chat on WhatsApp
@@ -257,10 +281,12 @@ const ContactSection = () => {
                   <Clock className="h-5 w-5 text-accent" />
                   <div>
                     <p className="font-medium">Business Hours</p>
-                    <p className="text-sm text-muted-foreground">Monday - Saturday: 9:00 AM - 6:00 PM (IST)</p>
+                    <p className="text-sm text-muted-foreground">
+                      Monday - Saturday: 9:00 AM - 6:00 PM (IST)
+                    </p>
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-sm">
                     <CheckCircle className="h-4 w-4 text-green-600" />

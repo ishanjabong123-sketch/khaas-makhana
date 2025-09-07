@@ -1,14 +1,15 @@
 import { Badge } from '@/components/ui/badge';
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Globe, 
-  Facebook, 
-  Twitter, 
-  Linkedin, 
+import { Link } from 'react-router-dom';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Globe,
+  Facebook,
+  Twitter,
+  Linkedin,
   Instagram,
-  ArrowUp
+  ArrowUp,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -18,15 +19,15 @@ const Footer = () => {
   };
 
   const quickLinks = [
-    { name: 'About Us', href: '#about' },
-    { name: 'Products', href: '#products' },
-    { name: 'Export Process', href: '#export' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Products', href: '/products' },
+    { name: 'Export Process', href: '/export-process' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   const products = [
     'Premium Grade A+',
-    'Standard Grade A', 
+    'Standard Grade A',
     'Commercial Grade B',
     'Custom Packaging',
     'Organic Certification',
@@ -37,7 +38,7 @@ const Footer = () => {
     'Export License',
     'ISO 22000',
     'HACCP Compliant',
-    'Organic Certified'
+    'Organic Certified',
   ];
 
   return (
@@ -52,28 +53,48 @@ const Footer = () => {
               <p className="text-primary-foreground/80 text-sm">
                 Premium Fox Nut Exporters
               </p>
-              <Badge variant="secondary" className="mt-2 bg-accent text-accent-foreground">
+              <Badge
+                variant="secondary"
+                className="mt-2 bg-accent text-accent-foreground"
+              >
                 From Bihar to the World
               </Badge>
             </div>
-            
+
             <p className="text-primary-foreground/70 leading-relaxed">
-              Leading exporters of premium quality makhana from Purnia, Bihar. 
-              Trusted by international buyers for consistent quality and reliable supply.
+              Leading exporters of premium quality makhana from Purnia, Bihar.
+              Trusted by international buyers for consistent quality and
+              reliable supply.
             </p>
 
             {/* Social Links */}
             <div className="flex space-x-4">
-              <Button variant="ghost" size="sm" className="text-primary-foreground/70 hover:text-accent">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-primary-foreground/70 hover:text-accent"
+              >
                 <Facebook className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="text-primary-foreground/70 hover:text-accent">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-primary-foreground/70 hover:text-accent"
+              >
                 <Twitter className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="text-primary-foreground/70 hover:text-accent">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-primary-foreground/70 hover:text-accent"
+              >
                 <Linkedin className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="text-primary-foreground/70 hover:text-accent">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-primary-foreground/70 hover:text-accent"
+              >
                 <Instagram className="h-5 w-5" />
               </Button>
             </div>
@@ -85,12 +106,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a 
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-primary-foreground/70 hover:text-accent transition-colors duration-300"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -111,14 +132,17 @@ const Footer = () => {
           {/* Contact Info */}
           <div className="space-y-6">
             <h4 className="text-lg font-semibold">Contact Information</h4>
-            
+
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-accent mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-primary-foreground/80 text-sm font-medium">Office Address</p>
+                  <p className="text-primary-foreground/80 text-sm font-medium">
+                    Office Address
+                  </p>
                   <p className="text-primary-foreground/70 text-sm">
-                    Purnia, Bihar, India<br />
+                    Purnia, Bihar, India
+                    <br />
                     Pin: 854301
                   </p>
                 </div>
@@ -127,26 +151,40 @@ const Footer = () => {
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-accent" />
                 <div>
-                  <p className="text-primary-foreground/80 text-sm font-medium">Phone</p>
-                  <p className="text-primary-foreground/70 text-sm">+91-XXXXX-XXXXX</p>
+                  <p className="text-primary-foreground/80 text-sm font-medium">
+                    Phone
+                  </p>
+                  <p className="text-primary-foreground/70 text-sm">
+                    +91-70154-12372
+                  </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-accent" />
                 <div>
-                  <p className="text-primary-foreground/80 text-sm font-medium">Email</p>
-                  <p className="text-primary-foreground/70 text-sm">export@khaasmakhana.com</p>
+                  <p className="text-primary-foreground/80 text-sm font-medium">
+                    Email
+                  </p>
+                  <p className="text-primary-foreground/70 text-sm">
+                    export@khaasmakhana.com
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* Certifications */}
             <div className="space-y-3">
-              <p className="text-sm font-medium text-primary-foreground/80">Certifications:</p>
+              <p className="text-sm font-medium text-primary-foreground/80">
+                Certifications:
+              </p>
               <div className="flex flex-wrap gap-1">
                 {certifications.map((cert, index) => (
-                  <Badge key={index} variant="outline" className="text-xs border-primary-foreground/30 text-primary-foreground/70">
+                  <Badge
+                    key={index}
+                    variant="outline"
+                    className="text-xs border-primary-foreground/30 text-primary-foreground/70"
+                  >
                     {cert}
                   </Badge>
                 ))}
@@ -172,9 +210,9 @@ const Footer = () => {
                 <Globe className="h-4 w-4" />
                 <span>Serving 25+ Countries</span>
               </div>
-              
-              <Button 
-                variant="ghost" 
+
+              <Button
+                variant="ghost"
                 size="sm"
                 onClick={scrollToTop}
                 className="text-primary-foreground/70 hover:text-accent"
