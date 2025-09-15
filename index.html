@@ -76,6 +76,18 @@
 
   <body>
     <div id="root"></div>
+
+    <form name="quote-request" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="company" />
+      <input type="text" name="country" />
+      <input type="text" name="productType" />
+      <input type="text" name="quantity" />
+      <textarea name="message"></textarea>
+      <input type="hidden" name="form-name" value="quote-request" />
+    </form>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
