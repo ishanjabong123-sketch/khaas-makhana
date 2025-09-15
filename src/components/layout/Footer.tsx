@@ -7,7 +7,7 @@ import {
   Globe,
   Facebook,
   Twitter,
-  Linkedin,
+  // Linkedin,
   Instagram,
   ArrowUp,
 } from 'lucide-react';
@@ -25,27 +25,28 @@ const Footer = () => {
     { name: 'Contact', href: '/contact' },
   ];
 
-  const products = [
-    'Premium Grade A+',
-    'Standard Grade A',
-    'Commercial Grade B',
-    'Custom Packaging',
-    'Organic Certification',
-  ];
+  // const products = [
+  //   'Premium Grade A+',
+  //   'Standard Grade A',
+  //   'Commercial Grade B',
+  //   'Custom Packaging',
+  //   'Organic Certification',
+  // ];
 
   const certifications = [
-    'FSSAI Certified',
-    'Export License',
-    'ISO 22000',
-    'HACCP Compliant',
-    'Organic Certified',
+    'GST',
+    'FSSAI',
+    'APEDA',
+    'Halal',
+    'Phytosanitary Certificate',
+    'Lab Test Reports on request',
   ];
 
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
-        <div className="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="py-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Company Info */}
           <div className="space-y-6">
             <div>
@@ -74,6 +75,13 @@ const Footer = () => {
                 size="sm"
                 className="text-primary-foreground/70 hover:text-accent"
               >
+                <Instagram className="h-5 w-5" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-primary-foreground/70 hover:text-accent"
+              >
                 <Facebook className="h-5 w-5" />
               </Button>
               <Button
@@ -83,20 +91,13 @@ const Footer = () => {
               >
                 <Twitter className="h-5 w-5" />
               </Button>
-              <Button
+              {/* <Button
                 variant="ghost"
                 size="sm"
                 className="text-primary-foreground/70 hover:text-accent"
               >
                 <Linkedin className="h-5 w-5" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-primary-foreground/70 hover:text-accent"
-              >
-                <Instagram className="h-5 w-5" />
-              </Button>
+              </Button> */}
             </div>
           </div>
 
@@ -118,7 +119,7 @@ const Footer = () => {
           </div>
 
           {/* Products */}
-          <div className="space-y-6">
+          {/* <div className="space-y-6">
             <h4 className="text-lg font-semibold">Our Products</h4>
             <ul className="space-y-3">
               {products.map((product, index) => (
@@ -127,7 +128,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Contact Info */}
           <div className="space-y-6">
@@ -167,7 +168,7 @@ const Footer = () => {
                     Email
                   </p>
                   <p className="text-primary-foreground/70 text-sm">
-                    export@khaasmakhana.com
+                    khaasmakhana@gmail.com
                   </p>
                 </div>
               </div>

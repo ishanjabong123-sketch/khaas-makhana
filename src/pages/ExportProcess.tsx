@@ -52,12 +52,12 @@ const ExportProcess = () => {
   ];
 
   const certifications = [
-    'ISO 22000:2018 Food Safety',
-    'HACCP Certified',
-    'Organic Certification',
-    'Export License',
-    'FSSAI Registration',
-    'GMP Compliance',
+    'GST',
+    'FSSAI',
+    'APEDA',
+    'Halal',
+    'Phytosanitary Certificate',
+    'Lab Test Reports on request',
   ];
 
   return (
@@ -127,7 +127,7 @@ const ExportProcess = () => {
               </Card>
               <Card className="text-center">
                 <CardContent className="pt-6">
-                  <div className="text-3xl font-bold text-primary">500+</div>
+                  <div className="text-3xl font-bold text-primary">50+</div>
                   <div className="text-muted-foreground">
                     Tons Annual Export
                   </div>
@@ -164,10 +164,10 @@ const ExportProcess = () => {
                   <Button size="lg" className="btn-accent">
                     Get Export Quote
                   </Button>
-                  <Button variant="outline" size="lg">
+                  {/* <Button variant="outline" size="lg">
                     <Download className="mr-2 h-4 w-4" />
                     Download Export Guide
-                  </Button>
+                  </Button> */}
                 </div>
               </CardContent>
             </Card>

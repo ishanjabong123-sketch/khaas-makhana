@@ -10,15 +10,15 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImage from '@/assets/hero-makhana.jpg';
-import makhanaVarieties from '@/assets/makhana-varieties.jpg';
+import farmingMakhana from '@/assets/farming-makhana.jpg';
 import processingFacility from '@/assets/processing-facility.jpg';
 
 const HeroSection = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const stats = [
-    { icon: Globe, label: 'Countries Served', value: '25+' },
-    { icon: Award, label: 'Years Experience', value: '15+' },
-    { icon: Users, label: 'Happy Clients', value: '500+' },
+    { icon: Globe, label: 'Countries Served', value: '5+' },
+    { icon: Award, label: 'Years Experience', value: '5+' },
+    { icon: Users, label: 'Happy Clients', value: '50+' },
   ];
 
   useEffect(() => {
@@ -64,9 +64,11 @@ const HeroSection = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="btn-accent group">
-                Get Bulk Quote
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <Button asChild size="lg" className="btn-accent group">
+                <Link to="/contact?scroll=form">
+                  Get Bulk Quote
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </Button>
               <Button
                 asChild
@@ -98,7 +100,7 @@ const HeroSection = () => {
               {/* Main Product Image */}
               <div className="relative group overflow-hidden rounded-2xl">
                 <img
-                  src={makhanaVarieties}
+                  src={farmingMakhana}
                   alt="Premium Makhana Varieties"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -127,7 +129,7 @@ const HeroSection = () => {
                       <span className="font-semibold">Modern Facility</span>
                     </div>
                     <p className="text-sm opacity-90">
-                      ISO Certified Processing
+                      FSSAI Certified Processing
                     </p>
                   </div>
                 </div>
@@ -140,7 +142,7 @@ const HeroSection = () => {
                     <Shield className="h-6 w-6 text-accent" />
                   </div>
                   <p className="text-white font-medium text-sm">
-                    ISO Certified
+                    FSSAI Certified
                   </p>
                 </div>
                 <div className="text-center">

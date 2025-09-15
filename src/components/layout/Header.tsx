@@ -87,8 +87,8 @@ const Header = () => {
               <Phone className="h-4 w-4" />
               <span>+91-70154-12372</span>
             </div>
-            <Button variant="default" className="btn-premium">
-              Get Bulk Quote
+            <Button asChild variant="default" className="btn-premium">
+              <Link to="/contact?scroll=form">Get Bulk Quote</Link>
             </Button>
           </div>
 
@@ -126,8 +126,8 @@ const Header = () => {
                 </Link>
               ))}
               <div className="pt-4 border-t border-border">
-                <Button variant="default" className="btn-premium w-full">
-                  Get Bulk Quote
+                <Button asChild variant="default" className="btn-premium w-full">
+                  <Link to="/contact?scroll=form">Get Bulk Quote</Link>
                 </Button>
               </div>
             </nav>

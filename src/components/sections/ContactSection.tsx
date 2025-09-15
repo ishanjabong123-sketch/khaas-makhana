@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,7 +12,6 @@ import {
   MessageCircle,
   Send,
   Clock,
-  Globe,
   Package,
   CheckCircle,
 } from 'lucide-react';
@@ -24,34 +23,95 @@ const ContactSection = () => {
     email: '',
     company: '',
     country: '',
+    productType: '',
     quantity: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const productOptions = [
+    { value: '>21 mm', label: '6+ or 7 Suta Handpicked ( > 21 mm )' },
+    { value: '18–21 mm', label: '6 Suta Normal + Handpicked ( 18–21 mm )' },
+    {
+      value: '15-18mm',
+      label: '3/3+ 4/4+ 5/5+ Suta Normal or Handpicked ( 15-18mm )',
+    },
+  ];
+
+  useEffect(() => {
+    // Read URL parameter for product selection
+    const urlParams = new URLSearchParams(window.location.search);
+    const productParam = urlParams.get('product');
+    if (productParam) {
+      setFormData((prev) => ({ ...prev, productType: productParam }));
+    }
+
+    // Only scroll to form if there's a product parameter or scroll flag
+    const shouldScroll = productParam || urlParams.get('scroll') === 'form';
+    if (shouldScroll) {
+      setTimeout(() => {
+        const formContainer = document.querySelector('#contact-form');
+        if (formContainer) {
+          formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+
+    const handleProductSelection = (event: CustomEvent) => {
+      setFormData((prev) => ({ ...prev, productType: event.detail }));
+    };
+
+    window.addEventListener(
+      'selectProduct',
+      handleProductSelection as EventListener
+    );
+    return () => {
+      window.removeEventListener(
+        'selectProduct',
+        handleProductSelection as EventListener
+      );
+    };
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    const form = e.currentTarget;
+    const formDataObj = new FormData(form);
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        body: formDataObj,
+      });
+
       toast({
         title: 'Quote Request Submitted!',
         description:
           "We'll contact you within 24 hours with pricing and availability.",
         duration: 5000,
       });
-      setIsSubmitting(false);
+
       setFormData({
         name: '',
         email: '',
         company: '',
         country: '',
+        productType: '',
         quantity: '',
         message: '',
       });
-    }, 1000);
+    } catch (err) {
+      toast({
+        title: 'Error',
+        description: 'Something went wrong while sending your request.',
+        duration: 5000,
+      });
+    }
+
+    setIsSubmitting(false);
   };
 
   const handleInputChange = (
@@ -73,7 +133,7 @@ const ContactSection = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'export@khaasmakhana.com',
+      value: 'khaasmakhana@gmail.com',
       description: '24/7 Email Support',
     },
     {
@@ -84,7 +144,7 @@ const ContactSection = () => {
     },
   ];
 
-  const whatsappNumber = '+91XXXXXXXXXX';
+  const whatsappNumber = '+917015412372';
   const whatsappMessage =
     "Hi! I'm interested in bulk makhana export. Please share pricing and availability.";
 
@@ -110,7 +170,7 @@ const ContactSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <Card className="shadow-premium">
+          <Card id="contact-form" className="shadow-premium scroll-mt-24">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Package className="h-6 w-6 text-accent" />
@@ -118,7 +178,16 @@ const ContactSection = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form
+                onSubmit={handleSubmit}
+                name="quote-request"
+                method="POST"
+                data-netlify="true"
+                className="space-y-6"
+              >
+                {/* hidden input for Netlify */}
+                <input type="hidden" name="form-name" value="quote-request" />
+
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="name">Full Name *</Label>
@@ -167,6 +236,39 @@ const ContactSection = () => {
                       required
                       placeholder="Your country"
                     />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <Label>Product Type *</Label>
+                  <div className="grid grid-cols-1 gap-3">
+                    {productOptions.map((option) => (
+                      <div
+                        key={option.value}
+                        className="flex items-center space-x-2"
+                      >
+                        <input
+                          type="radio"
+                          id={option.value}
+                          name="productType"
+                          value={option.value}
+                          checked={formData.productType === option.value}
+                          onChange={handleInputChange}
+                          required
+                          className="w-4 h-4 text-accent border-gray-300 focus:ring-accent focus:ring-2 accent-accent outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus:shadow-none"
+                          style={{
+                            boxShadow: 'none',
+                            outline: 'none',
+                          }}
+                        />
+                        <Label
+                          htmlFor={option.value}
+                          className="cursor-pointer"
+                        >
+                          {option.label}
+                        </Label>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -288,10 +390,10 @@ const ContactSection = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm">
+                  {/* <div className="flex items-center gap-2 text-sm">
                     <CheckCircle className="h-4 w-4 text-green-600" />
                     <span>Free product samples available</span>
-                  </div>
+                  </div> */}
                   <div className="flex items-center gap-2 text-sm">
                     <CheckCircle className="h-4 w-4 text-green-600" />
                     <span>Custom packaging solutions</span>
