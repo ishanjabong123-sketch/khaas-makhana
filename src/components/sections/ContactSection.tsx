@@ -127,7 +127,7 @@ const ContactSection = () => {
     {
       icon: Phone,
       title: 'Phone',
-      value: '+91-70154-12372',
+      value: '+91-87084-99295',
       description: 'Mon-Sat, 9AM-6PM IST',
     },
     {
@@ -144,7 +144,7 @@ const ContactSection = () => {
     },
   ];
 
-  const whatsappNumber = '+917015412372';
+  const whatsappNumber = '+918708499295';
   const whatsappMessage =
     "Hi! I'm interested in bulk makhana export. Please share pricing and availability.";
 

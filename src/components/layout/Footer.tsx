@@ -156,7 +156,7 @@ const Footer = () => {
                     Phone
                   </p>
                   <p className="text-primary-foreground/70 text-sm">
-                    +91-70154-12372
+                    +91-87084-99295
                   </p>
                 </div>
               </div>
