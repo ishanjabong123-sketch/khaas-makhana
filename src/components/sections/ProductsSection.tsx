@@ -55,44 +55,47 @@ const ProductsSection = () => {
     {
       label: 'Packaging Options',
       value:
-        '10Kg / 25Kg PP Bags OR Vaccum / Nitrogen flush packets (for retails / private labels)',
+        '10Kg / 25Kg PP Bags OR Vacuum / Nitrogen flush packets (for retail / private labels)',
       colRatio: 'md:col-span-2',
     },
   ];
 
   return (
-    <section id="products" className="py-20">
+    <section id="products" className="overflow-hidden py-16 sm:py-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="mb-12 text-center sm:mb-16 animate-fade-in-up">
           <Badge variant="outline" className="mb-4">
             Our Products
           </Badge>
-          <h2 className="text-4xl font-bold mb-6">
+          <h2 className="mb-6 text-3xl font-bold leading-tight sm:text-4xl">
             Premium
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               {' '}
               Makhana Varieties
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-xl">
             Carefully graded and sorted makhana available in different sizes and
             specifications to meet diverse international market requirements.
           </p>
         </div>
 
         {/* Hero Product Image */}
-        <div className="relative mb-16 rounded-2xl overflow-hidden shadow-premium">
+        <div
+          className="relative mb-12 overflow-hidden rounded-xl shadow-premium sm:mb-16 sm:rounded-2xl animate-fade-in-up"
+          style={{ animationDelay: '120ms' }}
+        >
           <img
             src={varietiesImage}
             alt="Different varieties of premium makhana"
-            className="w-full h-[400px] object-cover"
+            className="h-[320px] w-full object-cover transition-transform duration-700 hover:scale-105 sm:h-[400px]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent flex items-center">
-            <div className="max-w-lg ml-8 text-white">
-              <h3 className="text-3xl font-bold mb-4">
+          <div className="absolute inset-0 flex items-end bg-gradient-to-t from-primary/90 via-primary/55 to-transparent p-5 sm:items-center sm:bg-gradient-to-r sm:from-primary/80 sm:via-primary/45 sm:to-transparent sm:p-8">
+            <div className="max-w-xl text-white">
+              <h3 className="mb-3 text-2xl font-bold leading-tight sm:mb-4 sm:text-3xl">
                 Premium 6 / 6+ Suta Makhana (≈ 18–21 mm)
               </h3>
-              <p className="text-lg mb-6">
+              <p className="text-sm leading-relaxed text-white/90 sm:mb-6 sm:text-lg">
                 Extra-large, export-grade fox nuts, carefully sorted for premium
                 markets — full round puff, minimal breakage, natural creamy
                 white color, and long shelf life.
@@ -106,13 +109,14 @@ const ProductsSection = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="mb-12 grid gap-6 md:grid-cols-3 lg:gap-8 sm:mb-16">
           {products.map((product, index) => (
             <Card
               key={index}
-              className={`relative hover:shadow-xl transition-all duration-300 hover:scale-105 ${
+              className={`relative flex h-full flex-col transition-all duration-500 hover:-translate-y-1 hover:shadow-xl md:hover:scale-[1.02] animate-fade-in-up ${
                 product.popular ? 'border-accent shadow-glow' : ''
               }`}
+              style={{ animationDelay: `${180 + index * 90}ms` }}
             >
               {product.popular && (
                 <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent text-accent-foreground">
@@ -122,23 +126,25 @@ const ProductsSection = () => {
               )}
 
               <CardHeader className="text-center pb-4">
-                <CardTitle className="text-2xl">{product.category}</CardTitle>
-                <div className="text-lg font-medium text-muted-foreground mb-2">
+                <CardTitle className="text-xl leading-tight sm:text-2xl">
+                  {product.category}
+                </CardTitle>
+                <div className="mb-2 text-base font-medium leading-snug text-muted-foreground sm:text-lg">
                   {product.grade}
                 </div>
-                <div className="text-accent font-bold text-xl">
+                <div className="text-xl font-bold text-accent">
                   {product.size}
                 </div>
               </CardHeader>
 
-              <CardContent className="space-y-6">
-                <p className="text-muted-foreground text-sm">
+              <CardContent className="flex flex-1 flex-col space-y-6">
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   {product.description}
                 </p>
 
                 <div className="space-y-2">
                   <h4 className="font-semibold text-sm">Key Features:</h4>
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-1.5">
                     {product.features.map((feature, idx) => (
                       <Badge key={idx} variant="secondary" className="text-xs">
                         {feature}
@@ -147,7 +153,7 @@ const ProductsSection = () => {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t">
+                <div className="mt-auto border-t pt-4">
                   <div className="text-center">
                     <div className="text-lg font-semibold text-primary mb-3">
                       {product.price}
@@ -169,26 +175,33 @@ const ProductsSection = () => {
         </div>
 
         {/* Specifications */}
-        <Card className="bg-secondary/50">
+        <Card
+          className="overflow-hidden bg-secondary/50 shadow-premium animate-fade-in-up"
+          style={{ animationDelay: '420ms' }}
+        >
           <CardHeader className="text-center">
-            <CardTitle className="flex items-center justify-center gap-2">
+            <CardTitle className="flex flex-col items-center justify-center gap-2 text-xl leading-tight sm:flex-row sm:text-2xl">
               <Award className="h-6 w-6 text-accent" />
               Product Specifications
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:gap-6">
               {specifications.map((spec, index) => (
                 <div
                   key={index}
-                  className={`flex justify-between items-center p-3 bg-white rounded-lg ${
-                    spec.colRatio || 'md:col-span-1 col-span-2'
+                  className={`min-w-0 rounded-lg border border-border/60 bg-white/95 p-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md ${
+                    spec.colRatio || ''
                   }`}
                 >
-                  <span className="font-medium">{spec.label}:</span>
-                  <span className="text-primary font-semibold">
-                    {spec.value}
-                  </span>
+                  <div className="flex min-w-0 flex-col gap-1.5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                    <span className="text-sm font-medium text-foreground/80 sm:text-base">
+                      {spec.label}:
+                    </span>
+                    <span className="min-w-0 break-words text-sm font-semibold leading-relaxed text-primary sm:max-w-[62%] sm:text-right sm:text-base">
+                      {spec.value}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>

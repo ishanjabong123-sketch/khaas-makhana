@@ -41,20 +41,20 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-secondary/30">
+    <section id="about" className="bg-secondary/30 py-16 sm:py-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="mb-12 text-center animate-fade-in-up sm:mb-16">
           <Badge variant="outline" className="mb-4">
             About Khaas Makhana
           </Badge>
-          <h2 className="text-4xl font-bold mb-6">
+          <h2 className="mb-6 text-3xl font-bold leading-tight sm:text-4xl">
             The Global Hub of
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               {' '}
               Premium Makhana
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-xl">
             From the fertile wetlands of Purnia, Bihar - the world's largest
             makhana producing region - we bring you the finest quality fox nuts
             with authentic taste and superior nutrition.
@@ -63,20 +63,22 @@ const AboutSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Image */}
-          <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-premium">
+          <div className="relative animate-fade-in-up" style={{ animationDelay: '120ms' }}>
+            <div className="relative overflow-hidden rounded-xl shadow-premium sm:rounded-2xl">
               <img
                 src={processingImage}
                 alt="Makhana processing facility"
-                className="w-full h-[500px] object-cover"
+                className="h-[320px] w-full object-cover transition-transform duration-700 hover:scale-105 sm:h-[500px]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
             </div>
 
             {/* Floating Stats Card */}
-            <Card className="absolute -bottom-6 -right-6 bg-white shadow-glow border-accent/20">
-              <CardContent className="p-6 text-center">
-                <div className="text-3xl font-bold text-primary mb-2">50+</div>
+            <Card className="absolute bottom-4 right-4 max-w-[calc(100%-2rem)] border-accent/20 bg-white shadow-glow sm:-bottom-6 sm:-right-6 sm:max-w-none">
+              <CardContent className="p-4 text-center sm:p-6">
+                <div className="mb-1 text-2xl font-bold text-primary sm:mb-2 sm:text-3xl">
+                  50+
+                </div>
                 <div className="text-sm text-muted-foreground">
                   Tons Exported Annually
                 </div>
@@ -85,9 +87,11 @@ const AboutSection = () => {
           </div>
 
           {/* Right Column - Content */}
-          <div className="space-y-8">
+          <div className="space-y-8 animate-fade-in-up" style={{ animationDelay: '220ms' }}>
             <div className="space-y-6">
-              <h3 className="text-3xl font-bold">Why Choose Purnia Makhana?</h3>
+              <h3 className="text-2xl font-bold leading-tight sm:text-3xl">
+                Why Choose Purnia Makhana?
+              </h3>
               <div className="space-y-4 text-muted-foreground">
                 <p>
                   Purnia district in Bihar produces over 80% of the world's
@@ -114,7 +118,7 @@ const AboutSection = () => {
                   <Badge
                     key={index}
                     variant="secondary"
-                    className="bg-primary/10 text-primary"
+                    className="bg-primary/10 text-primary transition-colors duration-300 hover:bg-primary hover:text-primary-foreground"
                   >
                     {cert}
                   </Badge>
@@ -125,14 +129,15 @@ const AboutSection = () => {
         </div>
 
         {/* Values Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-20">
+        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:mt-20 lg:grid-cols-4 lg:gap-8">
           {values.map((value, index) => (
             <Card
               key={index}
-              className="border-none shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="group border-none shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-xl md:hover:scale-[1.02] animate-fade-in-up"
+              style={{ animationDelay: `${300 + index * 80}ms` }}
             >
               <CardContent className="p-6 text-center space-y-4">
-                <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 transition-colors duration-300 group-hover:bg-primary/15">
                   <value.icon className="h-8 w-8 text-primary" />
                 </div>
                 <h4 className="text-xl font-semibold">{value.title}</h4>

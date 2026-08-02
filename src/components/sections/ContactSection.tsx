@@ -33,6 +33,13 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
+// Map product categories from ProductsSection to productType values.
+const categoryToProductTypeMap: Record<string, string> = {
+  'Export Premium': '>21 mm',
+  'Retail Premium': '18–21 mm',
+  Commercial: '15-18mm',
+};
+
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -48,13 +55,6 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [countryOpen, setCountryOpen] = useState(false);
   const { toast } = useToast();
-
-  // Map product categories from ProductsSection to productType values
-  const categoryToProductTypeMap: Record<string, string> = {
-    'Export Premium': '>21 mm',
-    'Retail Premium': '18–21 mm',
-    Commercial: '15-18mm',
-  };
 
   const productOptions = [
     { value: '>21 mm', label: '6+ or 7 Suta Handpicked ( > 21 mm )' },
@@ -651,28 +651,32 @@ const ContactSection = () => {
     "Hi! I'm interested in bulk makhana export. Please share pricing and availability.";
 
   return (
-    <section id="contact" className="py-20 bg-secondary/30">
+    <section id="contact" className="bg-secondary/30 py-16 sm:py-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="mb-12 text-center animate-fade-in-up sm:mb-16">
           <Badge variant="outline" className="mb-4">
             Get In Touch
           </Badge>
-          <h2 className="text-4xl font-bold mb-6">
+          <h2 className="mb-6 text-3xl font-bold leading-tight sm:text-4xl">
             Ready to
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               {' '}
               Start Importing?
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-xl">
             Contact us for bulk pricing, product samples, and custom packaging
             solutions. Our export team is ready to serve international buyers.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Contact Form */}
-          <Card id="contact-form" className="shadow-premium scroll-mt-24">
+          <Card
+            id="contact-form"
+            className="scroll-mt-24 shadow-premium animate-fade-in-up"
+            style={{ animationDelay: '120ms' }}
+          >
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Package className="h-6 w-6 text-accent" />
@@ -741,12 +745,14 @@ const ContactSection = () => {
                           variant="outline"
                           role="combobox"
                           aria-expanded={countryOpen}
-                          className="w-full justify-between h-10"
+                          className="h-10 w-full min-w-0 justify-between"
                         >
                           {selectedCountry ? (
-                            <span className="flex items-center gap-2">
+                            <span className="flex min-w-0 items-center gap-2">
                               <span>{selectedCountry.flag}</span>
-                              <span>{selectedCountry.name}</span>
+                              <span className="truncate">
+                                {selectedCountry.name}
+                              </span>
                             </span>
                           ) : (
                             'Select your country'
@@ -842,7 +848,7 @@ const ContactSection = () => {
                     {productOptions.map((option) => (
                       <div
                         key={option.value}
-                        className="flex items-center space-x-2"
+                        className="flex items-start gap-2 rounded-lg border border-border/60 bg-white/70 p-3 transition-all duration-300 hover:border-accent/40 hover:bg-white"
                       >
                         <input
                           type="radio"
@@ -852,7 +858,7 @@ const ContactSection = () => {
                           checked={formData.productType === option.value}
                           onChange={handleInputChange}
                           required
-                          className="w-4 h-4 text-accent border-gray-300 focus:ring-accent focus:ring-2 accent-accent outline-none focus:outline-none focus-visible:outline-none focus:ring-0 focus:shadow-none"
+                          className="mt-1 h-4 w-4 flex-shrink-0 border-gray-300 text-accent accent-accent outline-none focus:outline-none focus:ring-0 focus:ring-accent focus:ring-2 focus:shadow-none focus-visible:outline-none"
                           style={{
                             boxShadow: 'none',
                             outline: 'none',
@@ -860,7 +866,7 @@ const ContactSection = () => {
                         />
                         <Label
                           htmlFor={option.value}
-                          className="cursor-pointer"
+                          className="cursor-pointer text-sm leading-relaxed sm:text-base"
                         >
                           {option.label}
                         </Label>
@@ -927,7 +933,8 @@ const ContactSection = () => {
               {contactInfo.map((info, index) => (
                 <Card
                   key={index}
-                  className="border-none shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="border-none shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-xl animate-fade-in-up"
+                  style={{ animationDelay: `${220 + index * 80}ms` }}
                 >
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4">
@@ -948,7 +955,10 @@ const ContactSection = () => {
             </div>
 
             {/* WhatsApp CTA */}
-            <Card className="bg-green-50 border-green-200">
+            <Card
+              className="border-green-200 bg-green-50 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl animate-fade-in-up"
+              style={{ animationDelay: '460ms' }}
+            >
               <CardContent className="p-6 text-center">
                 <MessageCircle className="h-12 w-12 text-green-600 mx-auto mb-4" />
                 <h4 className="text-xl font-semibold mb-2">
@@ -959,7 +969,7 @@ const ContactSection = () => {
                   inquiries
                 </p>
                 <Button
-                  className="bg-green-600 hover:bg-green-700 text-white"
+                  className="w-full bg-green-600 text-white transition-all duration-300 hover:bg-green-700 sm:w-auto"
                   onClick={() =>
                     window.open(
                       `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
@@ -976,7 +986,10 @@ const ContactSection = () => {
             </Card>
 
             {/* Business Hours & Features */}
-            <Card>
+            <Card
+              className="transition-all duration-500 hover:-translate-y-1 hover:shadow-xl animate-fade-in-up"
+              style={{ animationDelay: '540ms' }}
+            >
               <CardContent className="p-6 space-y-4">
                 <div className="flex items-center gap-3">
                   <Clock className="h-5 w-5 text-accent" />

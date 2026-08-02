@@ -32,7 +32,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative flex min-h-[100svh] items-center overflow-hidden py-24 sm:py-28 lg:py-0"
     >
       {/* Background Image with Overlay */}
       <div
@@ -42,21 +42,21 @@ const HeroSection = () => {
         <div className="absolute inset-0 hero-gradient opacity-80"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
           {/* Left Column - Content */}
-          <div className="space-y-8 animate-fade-in-up">
+          <div className="space-y-6 animate-fade-in-up sm:space-y-8">
             <div className="space-y-4">
-              <h1 className="text-4xl lg:text-6xl font-bold text-white leading-tight">
+              <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
                 From Bihar to the{' '}
                 <span className="bg-gradient-to-r from-accent to-yellow-300 bg-clip-text text-transparent">
                   World
                 </span>
               </h1>
-              <h2 className="text-xl lg:text-2xl text-white/90 font-medium">
+              <h2 className="text-lg font-medium text-white/90 sm:text-xl lg:text-2xl">
                 Premium Makhana Exporters
               </h2>
-              <p className="text-lg text-white/80 max-w-lg leading-relaxed">
+              <p className="max-w-lg text-base leading-relaxed text-white/80 sm:text-lg">
                 Delivering the finest quality fox nuts from the fertile lands of
                 Purnia, Bihar. Trusted by international buyers for premium
                 organic makhana with global export standards.
@@ -64,7 +64,7 @@ const HeroSection = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="btn-accent group">
+              <Button asChild size="lg" className="btn-accent group w-full sm:w-auto">
                 <Link to="/contact?scroll=form">
                   Get Bulk Quote
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -74,31 +74,39 @@ const HeroSection = () => {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-white/80 text-white bg-white/10 hover:bg-white hover:text-primary backdrop-blur-sm"
+                className="w-full border-white/80 bg-white/10 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-primary sm:w-auto"
               >
                 <Link to="/products">View Products</Link>
               </Button>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8">
+            <div className="grid grid-cols-3 gap-3 pt-6 sm:gap-6 sm:pt-8">
               {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <stat.icon className="h-8 w-8 mx-auto mb-2 text-accent" />
-                  <div className="text-2xl font-bold text-white">
+                <div
+                  key={index}
+                  className="rounded-lg bg-white/5 p-2 text-center backdrop-blur-sm transition-all duration-300 hover:bg-white/10 sm:bg-transparent sm:p-0"
+                >
+                  <stat.icon className="mx-auto mb-2 h-6 w-6 text-accent sm:h-8 sm:w-8" />
+                  <div className="text-xl font-bold text-white sm:text-2xl">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-white/70">{stat.label}</div>
+                  <div className="text-xs leading-snug text-white/70 sm:text-sm">
+                    {stat.label}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Right Column - Product Showcase Gallery */}
-          <div className="hidden lg:block h-[600px] relative">
+          <div
+            className="relative hidden h-[600px] animate-fade-in-up lg:block"
+            style={{ animationDelay: '180ms' }}
+          >
             <div className="grid grid-cols-2 gap-4 h-full">
               {/* Main Product Image */}
-              <div className="relative group overflow-hidden rounded-2xl">
+              <div className="group relative overflow-hidden rounded-2xl shadow-premium transition-transform duration-500 hover:-translate-y-1">
                 <img
                   src={farmingMakhana}
                   alt="Premium Makhana Varieties"
@@ -116,7 +124,7 @@ const HeroSection = () => {
               </div>
 
               {/* Processing Facility */}
-              <div className="relative group overflow-hidden rounded-2xl">
+              <div className="group relative overflow-hidden rounded-2xl shadow-premium transition-transform duration-500 hover:-translate-y-1">
                 <img
                   src={processingFacility}
                   alt="Modern Processing Facility"
@@ -136,7 +144,7 @@ const HeroSection = () => {
               </div>
 
               {/* Quality Badges */}
-              <div className="col-span-2 flex justify-center items-center gap-6 bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+              <div className="col-span-2 flex items-center justify-center gap-6 rounded-2xl bg-white/10 p-6 shadow-premium backdrop-blur-sm">
                 <div className="text-center">
                   <div className="bg-accent/20 rounded-full p-3 mb-2 mx-auto w-fit">
                     <Shield className="h-6 w-6 text-accent" />
