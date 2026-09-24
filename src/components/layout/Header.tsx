@@ -54,7 +54,7 @@ const Header = () => {
               alt="Khaas Makhana Logo"
               width={64}
               height={64}
-              priority={isHomePage}
+              preload={isHomePage}
               className="h-12 w-auto sm:h-14 lg:h-16"
             />
             <div className="flex flex-col">
