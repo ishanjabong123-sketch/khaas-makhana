@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -40,7 +42,19 @@ const categoryToProductTypeMap: Record<string, string> = {
   Commercial: '15-18mm',
 };
 
-const ContactSection = () => {
+const ContactSection = ({
+  initialProduct,
+  shouldScrollToForm = false,
+  titleAs = 'h2',
+}: {
+  initialProduct?: string;
+  shouldScrollToForm?: boolean;
+  titleAs?: 'h1' | 'h2';
+}) => {
+  const TitleTag = titleAs;
+  const initialProductType = initialProduct
+    ? categoryToProductTypeMap[initialProduct] || initialProduct
+    : '';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -48,7 +62,7 @@ const ContactSection = () => {
     countryCode: '+1',
     company: '',
     country: 'United States',
-    productType: '',
+    productType: initialProductType,
     quantity: '',
     message: '',
   });
@@ -497,17 +511,15 @@ const ContactSection = () => {
 
   useEffect(() => {
     // Read URL parameter for product selection
-    const urlParams = new URLSearchParams(window.location.search);
-    const productParam = urlParams.get('product');
-    if (productParam) {
+    if (initialProduct) {
       // Map category name to productType value
       const mappedProductType =
-        categoryToProductTypeMap[productParam] || productParam;
+        categoryToProductTypeMap[initialProduct] || initialProduct;
       setFormData((prev) => ({ ...prev, productType: mappedProductType }));
     }
 
     // Only scroll to form if there's a product parameter or scroll flag
-    const shouldScroll = productParam || urlParams.get('scroll') === 'form';
+    const shouldScroll = initialProduct || shouldScrollToForm;
     if (shouldScroll) {
       setTimeout(() => {
         const formContainer = document.querySelector('#contact-form');
@@ -531,7 +543,7 @@ const ContactSection = () => {
         handleProductSelection as EventListener
       );
     };
-  }, []);
+  }, [initialProduct, shouldScrollToForm]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -561,12 +573,25 @@ const ContactSection = () => {
       'phoneWithCode',
       `${formData.countryCode}${formData.phone}`
     );
+    const encodedBody = new URLSearchParams(
+      Array.from(formDataObj.entries()).map(([key, value]) => [
+        key,
+        String(value),
+      ])
+    ).toString();
 
     try {
-      await fetch('/', {
+      const response = await fetch('/__forms.html', {
         method: 'POST',
-        body: formDataObj,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: encodedBody,
       });
+
+      if (!response.ok) {
+        throw new Error('Form submission failed');
+      }
 
       toast({
         title: 'Quote Request Submitted!',
@@ -657,13 +682,13 @@ const ContactSection = () => {
           <Badge variant="outline" className="mb-4">
             Get In Touch
           </Badge>
-          <h2 className="mb-6 text-3xl font-bold leading-tight sm:text-4xl">
+          <TitleTag className="mb-6 text-3xl font-bold leading-tight sm:text-4xl">
             Ready to
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               {' '}
               Start Importing?
             </span>
-          </h2>
+          </TitleTag>
           <p className="mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-xl">
             Contact us for bulk pricing, product samples, and custom packaging
             solutions. Our export team is ready to serve international buyers.
@@ -686,6 +711,7 @@ const ContactSection = () => {
             <CardContent>
               <form
                 onSubmit={handleSubmit}
+                action="/__forms.html"
                 name="quote-request"
                 method="POST"
                 data-netlify="true"

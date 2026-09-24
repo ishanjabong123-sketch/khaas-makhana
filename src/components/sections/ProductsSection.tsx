@@ -1,10 +1,16 @@
+'use client';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Star, Package, Award, Download } from 'lucide-react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import varietiesImage from '@/assets/makhana-varieties.jpg';
 
-const ProductsSection = () => {
+const ProductsSection = ({ titleAs = 'h2' }: { titleAs?: 'h1' | 'h2' }) => {
+  const TitleTag = titleAs;
+  const router = useRouter();
   const products = [
     {
       category: 'Export Premium',
@@ -37,7 +43,7 @@ const ProductsSection = () => {
   ];
 
   const handleRequestQuote = (category: string) => {
-    window.location.href = `/contact?product=${encodeURIComponent(category)}`;
+    router.push(`/contact?product=${encodeURIComponent(category)}`);
   };
 
   const specifications = [
@@ -67,13 +73,13 @@ const ProductsSection = () => {
           <Badge variant="outline" className="mb-4">
             Our Products
           </Badge>
-          <h2 className="mb-6 text-3xl font-bold leading-tight sm:text-4xl">
+          <TitleTag className="mb-6 text-3xl font-bold leading-tight sm:text-4xl">
             Premium
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               {' '}
               Makhana Varieties
             </span>
-          </h2>
+          </TitleTag>
           <p className="mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-xl">
             Carefully graded and sorted makhana available in different sizes and
             specifications to meet diverse international market requirements.
@@ -85,9 +91,10 @@ const ProductsSection = () => {
           className="relative mb-12 overflow-hidden rounded-xl shadow-premium sm:mb-16 sm:rounded-2xl animate-fade-in-up"
           style={{ animationDelay: '120ms' }}
         >
-          <img
+          <Image
             src={varietiesImage}
             alt="Different varieties of premium makhana"
+            sizes="(min-width: 1024px) 1200px, 100vw"
             className="h-[320px] w-full object-cover transition-transform duration-700 hover:scale-105 sm:h-[400px]"
           />
           <div className="absolute inset-0 flex items-end bg-gradient-to-t from-primary/90 via-primary/55 to-transparent p-5 sm:items-center sm:bg-gradient-to-r sm:from-primary/80 sm:via-primary/45 sm:to-transparent sm:p-8">

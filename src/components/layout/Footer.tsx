@@ -1,5 +1,7 @@
+'use client';
+
 import { Badge } from '@/components/ui/badge';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import {
   Mail,
   Phone,
@@ -108,7 +110,7 @@ const Footer = () => {
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <Link
-                    to={link.href}
+                    href={link.href}
                     className="text-primary-foreground/70 hover:text-accent transition-colors duration-300"
                   >
                     {link.name}

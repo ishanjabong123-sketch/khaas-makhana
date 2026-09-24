@@ -2,16 +2,10 @@
 
 [build]
   command = "npm run build"
-  publish = "dist"          # Vite outputs here by default
+  publish = ".next"
 
 [dev]
-  command = "npm run dev"   # start Vite locally
-  targetPort = 8080         # your vite.config.ts server port
-  port = 8888               # Netlify CLI proxy port
-  publish = "dist"
-
-# Redirect all routes to index.html (for React Router / SPA apps)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  command = "npm run dev"
+  targetPort = 3000
+  port = 8888
+  publish = ".next"

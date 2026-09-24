@@ -1,13 +1,17 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Link, useLocation } from 'react-router-dom';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
   const hasSolidHeader = isScrolled || !isHomePage || isMenuOpen;
 
   useEffect(() => {
@@ -20,7 +24,7 @@ const Header = () => {
 
   useEffect(() => {
     setIsMenuOpen(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -42,18 +46,21 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link
-            to="/"
+            href="/"
             className="flex flex-shrink-0 items-center space-x-1 transition-transform duration-300 hover:scale-[1.02]"
           >
-            <img
+            <Image
               src="/logo.png"
               alt="Khaas Makhana Logo"
+              width={64}
+              height={64}
+              priority={isHomePage}
               className="h-12 w-auto sm:h-14 lg:h-16"
             />
             <div className="flex flex-col">
-              <h1 className="text-xl font-bold text-accent sm:text-2xl lg:text-3xl">
+              <div className="text-xl font-bold text-accent sm:text-2xl lg:text-3xl">
                 Khaas Makhana
-              </h1>
+              </div>
               <p
                 className={`text-xs transition-colors duration-300 ${
                   hasSolidHeader ? 'text-muted-foreground' : 'text-white/70'
@@ -69,7 +76,7 @@ const Header = () => {
             {navigation.map((item) => (
               <Link
                 key={item.name}
-                to={item.href}
+                href={item.href}
                 className={`relative font-medium transition-colors duration-300 after:absolute after:-bottom-2 after:left-0 after:h-0.5 after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 hover:after:scale-x-100 ${
                   hasSolidHeader
                     ? 'text-foreground hover:text-primary'
@@ -92,7 +99,7 @@ const Header = () => {
               <span>+91-87084-99295</span>
             </div>
             <Button asChild variant="default" className="btn-premium">
-              <Link to="/contact?scroll=form">Get Bulk Quote</Link>
+              <Link href="/contact?scroll=form">Get Bulk Quote</Link>
             </Button>
           </div>
 
@@ -140,9 +147,9 @@ const Header = () => {
               {navigation.map((item) => (
                 <Link
                   key={item.name}
-                  to={item.href}
+                  href={item.href}
                   className={`rounded-lg px-3 py-3 font-medium transition-all duration-300 hover:bg-secondary hover:text-primary ${
-                    location.pathname === item.href
+                    pathname === item.href
                       ? 'bg-secondary text-primary'
                       : 'text-foreground'
                   }`}
@@ -159,7 +166,7 @@ const Header = () => {
                   className="btn-premium w-full"
                 >
                   <Link
-                    to="/contact?scroll=form"
+                    href="/contact?scroll=form"
                     tabIndex={isMenuOpen ? 0 : -1}
                   >
                     Get Bulk Quote

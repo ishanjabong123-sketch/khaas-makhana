@@ -1,5 +1,8 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import {
   ArrowRight,
   Globe,
@@ -8,7 +11,7 @@ import {
   Shield,
   CheckCircle,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import heroImage from '@/assets/hero-makhana.jpg';
 import farmingMakhana from '@/assets/farming-makhana.jpg';
 import processingFacility from '@/assets/processing-facility.jpg';
@@ -37,7 +40,7 @@ const HeroSection = () => {
       {/* Background Image with Overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(${heroImage.src})` }}
       >
         <div className="absolute inset-0 hero-gradient opacity-80"></div>
       </div>
@@ -65,7 +68,7 @@ const HeroSection = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="btn-accent group w-full sm:w-auto">
-                <Link to="/contact?scroll=form">
+                <Link href="/contact?scroll=form">
                   Get Bulk Quote
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -76,7 +79,7 @@ const HeroSection = () => {
                 size="lg"
                 className="w-full border-white/80 bg-white/10 text-white backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-primary sm:w-auto"
               >
-                <Link to="/products">View Products</Link>
+                <Link href="/products">View Products</Link>
               </Button>
             </div>
 
@@ -107,9 +110,10 @@ const HeroSection = () => {
             <div className="grid grid-cols-2 gap-4 h-full">
               {/* Main Product Image */}
               <div className="group relative overflow-hidden rounded-2xl shadow-premium transition-transform duration-500 hover:-translate-y-1">
-                <img
+                <Image
                   src={farmingMakhana}
                   alt="Premium Makhana Varieties"
+                  sizes="25vw"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -125,9 +129,10 @@ const HeroSection = () => {
 
               {/* Processing Facility */}
               <div className="group relative overflow-hidden rounded-2xl shadow-premium transition-transform duration-500 hover:-translate-y-1">
-                <img
+                <Image
                   src={processingFacility}
                   alt="Modern Processing Facility"
+                  sizes="25vw"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">

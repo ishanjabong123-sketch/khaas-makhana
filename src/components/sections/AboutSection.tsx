@@ -1,9 +1,11 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Leaf, Shield, Globe2, Heart } from 'lucide-react';
+import Image from 'next/image';
 import processingImage from '@/assets/processing-facility.jpg';
 
-const AboutSection = () => {
+const AboutSection = ({ titleAs = 'h2' }: { titleAs?: 'h1' | 'h2' }) => {
+  const TitleTag = titleAs;
   const values = [
     {
       icon: Leaf,
@@ -47,13 +49,13 @@ const AboutSection = () => {
           <Badge variant="outline" className="mb-4">
             About Khaas Makhana
           </Badge>
-          <h2 className="mb-6 text-3xl font-bold leading-tight sm:text-4xl">
+          <TitleTag className="mb-6 text-3xl font-bold leading-tight sm:text-4xl">
             The Global Hub of
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               {' '}
               Premium Makhana
             </span>
-          </h2>
+          </TitleTag>
           <p className="mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-xl">
             From the fertile wetlands of Purnia, Bihar - the world's largest
             makhana producing region - we bring you the finest quality fox nuts
@@ -65,9 +67,10 @@ const AboutSection = () => {
           {/* Left Column - Image */}
           <div className="relative animate-fade-in-up" style={{ animationDelay: '120ms' }}>
             <div className="relative overflow-hidden rounded-xl shadow-premium sm:rounded-2xl">
-              <img
+              <Image
                 src={processingImage}
                 alt="Makhana processing facility"
+                sizes="(min-width: 1024px) 50vw, 100vw"
                 className="h-[320px] w-full object-cover transition-transform duration-700 hover:scale-105 sm:h-[500px]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
